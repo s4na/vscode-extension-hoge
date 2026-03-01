@@ -31,9 +31,6 @@ VSCode で開いて `F5` を押すと Extension Development Host が起動しま
 
 ## リリース
 
-```bash
-git tag v0.1.0
-git push --tags
-```
+`main` ブランチにプッシュすると、GitHub Actions が `package.json` のバージョンを読み取り、自動で `.vsix` をビルドして Release を作成します。
 
-GitHub Actions が `.vsix` をビルドし、Release に添付します。
+新しいリリースを作るには `package.json` の `version` を更新してプッシュしてください。同じバージョンのリリースが既に存在する場合はスキップされます。
