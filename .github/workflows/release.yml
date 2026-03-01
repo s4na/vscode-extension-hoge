@@ -13,33 +13,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: jdx/mise-action@v2
 
-      - name: Get version from package.json
-        id: version
-        run: echo "version=v$(node -p 'require("./package.json").version')" >> "$GITHUB_OUTPUT"
-
-      - name: Check if tag already exists
-        id: tag_check
-        run: |
-          if git ls-remote --tags origin "${{ steps.version.outputs.version }}" | grep -q .; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - run: npm install
-        if: steps.tag_check.outputs.exists == 'false'
 
-      - run: npm run compile
-        if: steps.tag_check.outputs.exists == 'false'
+      - name: Bump patch version
+        run: npm version patch --no-git-tag-version
 
-      - run: npx vsce package
-        if: steps.tag_check.outputs.exists == 'false'
+      - name: Commit and push version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          VERSION="v$(node -p 'require("./package.json").version')"
+          git add package.json package-lock.json
+          git commit -m "chore: bump version to ${VERSION}"
+          git push
 
-      - name: Create release and upload .vsix
-        if: steps.tag_check.outputs.exists == 'false'
+      - name: Build
+        run: |
+          npm run compile
+          npx vsce package
+
+      - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "${{ steps.version.outputs.version }}" *.vsix --generate-notes
+        run: |
+          VERSION="v$(node -p 'require("./package.json").version')"
+          gh release create "${VERSION}" *.vsix --generate-notes
