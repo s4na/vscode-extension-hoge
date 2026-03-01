@@ -1,0 +1,9 @@
+.vscode/**
+.github/**
+src/**
+.gitignore
+.mise.toml
+tsconfig.json
+*.vsix
+plan.md
+install.sh
