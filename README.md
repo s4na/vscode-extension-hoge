@@ -8,6 +8,12 @@ VSCode Extension のサンプルプロジェクト。`curl | bash` の1行で Gi
 curl -fsSL https://raw.githubusercontent.com/s4na/vscode-extension-hoge/main/install.sh | bash
 ```
 
+## アンインストール
+
+```bash
+code --uninstall-extension s4na.hoge
+```
+
 ## 機能
 
 コマンドパレット（`Cmd+Shift+P`）から `Hoge: Hello World` を実行すると、メッセージが表示されます。
