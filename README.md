@@ -1,6 +1,8 @@
 # vscode-extension-hoge
 
-VSCode Extension のサンプルプロジェクト。`curl | bash` の1行で GitHub Releases から最新の `.vsix` をダウンロード＆インストールできます。
+シュッとインストールできる VSCode Extension 作成のサンプルリポジトリです。
+
+`curl | bash` の1行で GitHub Releases から最新の `.vsix` をダウンロード＆インストールできます。
 
 ## インストール
 
