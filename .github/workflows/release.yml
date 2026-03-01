@@ -18,6 +18,8 @@ jobs:
 
       - run: npm install
 
+      - run: npm run compile
+
       - run: npx vsce package
 
       - name: Create release and upload .vsix

@@ -16,7 +16,7 @@ code --uninstall-extension s4na.hoge
 
 ## 機能
 
-コマンドパレット（`Cmd+Shift+P`）から `Hoge: Hello World` を実行すると、メッセージが表示されます。
+コマンドパレット（`Cmd+Shift+P` / `Ctrl+Shift+P`）から `Hoge: Hello World` を実行すると、メッセージが表示されます。
 
 ## 開発
 
